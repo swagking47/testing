@@ -3,10 +3,10 @@
 /*
 __Pocketmine Plugin__
 class=Online
-Name=OnlinePlayers
-Description=count how many online players there are on sign
-Author=SwagKing47
-Version=1
+name=OnlinePlayers
+description=count how many online players there are on sign
+author=SwagKing47
+version=1
 apiversion=12
 */
 class Online implements plugin{
