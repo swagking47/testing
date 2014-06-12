@@ -24,6 +24,7 @@ $this->api->event("tile.update", array($this, "eventHandler"));
 public function eventHandler($data){
             
             if ($data->class === TILE_SIGN) {
+             $players = $this->api->player->online();
              if ($data->data['Text1'] == "[OnlinePlayers]"){
              $data->data["Text2"] = "[".count($players)."/100]";
                              
