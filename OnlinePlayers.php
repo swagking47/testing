@@ -9,8 +9,7 @@ Author=SwagKing47
 Version=1
 apiversion=12
 */
-class Limit implements plugin{
-Private $api;
+class Online implements plugin{
 
 public function __construct(ServerAPI $api, $server = false){
 
