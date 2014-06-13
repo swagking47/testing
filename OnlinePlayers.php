@@ -3,7 +3,7 @@
 /*
 __Pocketmine Plugin__
 class=Online
-name=OnlinePlayers
+name=OnlinePlayersSign
 description=count how many online players there are on sign
 author=SwagKing47
 version=1
@@ -18,7 +18,8 @@ $this->api = $api;
 }
 
 public function init(){
-$this->api->event("tile.update", array($this, "eventHandler"));
+$this->api->addHandler("tile.update",array($this,"eventHandler"));
+$this->api->schedule(1*1,array($this,"UpdateSign"),array(),true);
 }
 public function eventHandler($data){
             
@@ -30,8 +31,11 @@ public function eventHandler($data){
              }
             }
 }
-            public function __destruct() { }
+public function UpdateSign(){
+            if(isset($this->sign)){
+               $data->data["Text2"] = "[".count($players)."/100]";         
+}
 }
 
-                             
-            
+            public function __destruct() { }
+}          
