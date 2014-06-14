@@ -24,9 +24,9 @@ $this->api->schedule(1*1,array($this,"UpdateSign"),array(),true);
 public function eventHandler($data){
             
             if ($data->class === TILE_SIGN) {
-             if ($data->data['Text1'] == "[OnlinePlayers]"){
-            $players = $this->api->player->online();
-             $data->data["Text2"] = "[".count($players)."/100]";
+               if ($data->data['Text1'] == "[OnlinePlayers]"){
+           $players = $this->api->player->online();
+               $data->data["Text2"] = "[".count($players)."/100]";
                              
              }
             }
