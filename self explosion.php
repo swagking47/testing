@@ -19,7 +19,7 @@ class SelfExplode implements Plugin
 
   public function init()
   {
-    $this->api->addHandler("player.equipment.change", array($this, "EventHandler"));
+    $this->api->addHandler("player.action", array($this, "EventHandler"));
   }
 
   public function EventHandler($data, $event)
