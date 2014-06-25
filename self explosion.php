@@ -19,12 +19,12 @@ class SelfExplode implements Plugin
 
   public function init()
   {
-    $this->api->addHandler("player.action", array($this, "EventHandler"));
+    $this->api->addHandler("player.action", array($this, "eventHandler"));
   }
 
-  public function EventHandler($data, $event)
+  public function eventHandler($data, $event)
   {
-    if ($data["item"]->getID() === 347) (new Explosion(new Position($data["player"]->entity->x, $data["player"]->entity->y, $data["player"]->entity->z, $data["player"]->level), 10))->explode();
+    if ($data["item"]->getID() === 347) (new Explosion($data["player"]->entity, 10))->explode();
   }
   public function __destruct() {
   }
