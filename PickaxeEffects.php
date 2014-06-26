@@ -6,26 +6,20 @@ name=PickaxeEffects
 description=adds effects to the pickaxe
 version=1
 author=Swagboy 47
-class=PickaxeEffect
+class=WhatEever
 apiversion=11,12
 */
-class PickaxeEffect implements Plugin{
+class WhatEever implements Plugin{
 	private $api;
-	private $CONFIG;
+	private $pickaxe = true;
+	private $kind = 278;
+	private $effect = 1;
+	private $explosion = 3;
 	public function __construct(ServerAPI $api, $server = false){
 		$this->api = $api;
 	}
 
 	public function init(){
-		$this->CONFIG = array(
-			"Pickaxe" => 'enable',
-			"kind" => '278',
-			"effect" => 'explosion',
-			"explosion" => '3',
-		);
-		if(is_file($this->api->plugin->configPath($this) . "config.yml")){
-			$this->CONFIG = yaml_parse_file($this->api->plugin->configPath($this) . "config.yml");
-		}
 		$this->api->console->register("Pickaxe", "pickaxe commands", array($this, "commandHandler"));
 		$this->api->event("player.block.touch", array($this, "pickaxe"));
 		$this->api->addHandler("entity.health.change", array($this, "damage"));
@@ -34,63 +28,167 @@ class PickaxeEffect implements Plugin{
 			switch(strtolower($cmd)){
 			case "Pickaxe":
 				if($params[0] == "enable"){
-					if(isset($this->CONFIG["Pickaxe"])){
-						$this->CONFIG["Pickaxe"] = $params[0];
-				 		return "[Pickaxe] the pickaxe effects have been enabled!";
-				 	}
-			 	}
-				if($params[0] == "disable"){
-					if(isset($this->CONFIG["Pickaxe"])){
-					$this->CONFIG["Pickaxe"] = $params[0];
-					return "[Pickaxe] the pickaxe effects have been disabled!";
-					}
-				}
-				if($params[0] == "kind"){
-					if(isset($this->CONFIG["kind"])){
-						if($params[1] == "diamond"){
-							$this->CONFIG["kind"] = 278;
-							return "[Pickaxe] the pickaxe kind is set to diamond";
+                  if($this->pickaxe === true){
+                     $issuer->sendChat("[Pickaxe] Pickaxe is already enabled!");
+                  }
+                  if($this->pickaxe === false){
+                     $issuer->sendChat("[Pickaxe] Pickaxe is enabled!");
+                     $this->pickaxe = true;
+                }
+                }
+			if($params[0] == "disable"){
+                  if($this->pickaxe === false){
+                     $issuer->sendChat("[Pickaxe] Pickaxe is already disabled!");
+                  }
+                  if($this->pickaxe === true){
+                     $issuer->sendChat("[Pickaxe] Pickaxe is now disabled!");
+                     $this->pickaxe = false;
+                }
+                }
+				if($params[0] === "kind"){
+						if($params[1] === "diamond"){
+							if($this->kind === 278){
+							$issuer->sendChat("[Pickaxe] Pickaxe is already set diamond!");	
+							}
+							if($this->kind === 257){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to diamond");
+							 $this->kind = 278;
+							}
+							if($this->kind === 270){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to diamond");
+							 $this->kind = 278;
+							}
+							if($this->kind === 274){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to diamond");
+							 $this->kind = 278;
+							}
+							if($this->kind === 285){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to diamond");
+							 $this->kind = 278;
+							}
 						}
-						if($params[1] == "iron"){
-							$this->CONFIG["kind"] = 257;
-							return "[Pickaxe] the pickaxe kind is set to iron";
+						if($params[1] === "iron"){
+						if($this->kind === 257){
+							$issuer->sendChat("[Pickaxe] Pickaxe is already set iron!");	
+							}
+							if($this->kind === 278){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to iron!");
+							 $this->kind = 257;
+							}
+							if($this->kind === 270){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to iron!");
+							 $this->kind = 257;
+							}
+							if($this->kind === 274){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to iron!");
+							 $this->kind = 257;
+							}
+							if($this->kind === 285){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to iron!");
+							 $this->kind = 257;
+							}
 						}
 						if($params[1] == "gold"){
-							$this->CONFIG["kind"] = 285;
-							return "[Pickaxe] the pickaxe kind is set to diamond";
+						if($this->kind === 285){
+							$issuer->sendChat("[Pickaxe] Pickaxe is already set gold!");	
+							}
+							if($this->kind === 257){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to gold!");
+							 $this->kind = 285;
+							}
+							if($this->kind === 270){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to gold!");
+							 $this->kind = 285;
+							}
+							if($this->kind === 274){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to gold!");
+							 $this->kind = 285;
+							}
+							if($this->kind === 278){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to gold!");
+							 $this->kind = 285;
+							}
 						}
 						if($params[1] == "wood"){
-							$this->CONFIG["kind"] = 270;
-							return "[Pickaxe] the pickaxe kind is set to wood";
+                                                if($this->kind === 270){
+							$issuer->sendChat("[Pickaxe] Pickaxe is already set wood!");	
+							}
+							if($this->kind === 285){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to wood!");
+							 $this->kind = 270;
+							}
+							if($this->kind === 278){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to wood!");
+							 $this->kind = 270;
+							}
+							if($this->kind === 274){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to wood!");
+							 $this->kind = 270;
+							}
+							if($this->kind === 285){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to wood!");
+							 $this->kind = 270;
+							}
 						}
 						if($params[1] == "stone"){
-							$this->CONFIG["kind"] = 274;
-							return "[Pickaxe] the pickaxe kind is set to stone";
+							if($this->kind === 274){
+							$issuer->sendChat("[Pickaxe] Pickaxe is already set wood!");	
+							}
+							if($this->kind === 278){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to wood!");
+							 $this->kind = 274;
+							}
+							if($this->kind === 257){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to wood!");
+							 $this->kind = 274;
+							}
+							if($this->kind === 270){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to wood!");
+							 $this->kind = 274;
+							}
+							if($this->kind === 285){
+							$issuer->sendChat("[Pickaxe] Pickaxe is set to wood!");
+							 $this->kind = 274;
+							}
 						}
 					}
-				}
-				if($params[0] == "effect"){
-					if(isset($this->CONFIG["effect"])){
-						if($params[1] == "explosion"){
-							$this->CONFIG["kind"] = $params[1]; 
-							return "[Pickaxe] the pickaxe kind is set to diamond";
-						}
+				
+				if($params[0] === "effect"){
+				if($params[1] === "explosion"){
+					if($this->effect === 1){
+			                 $issuer->sendChat("[Pickaxe] Pickaxe effect is already set to explosion!");	
+					}
+					if($this->effect === 2){
+			                 $issuer->sendChat("[Pickaxe] Pickaxe effect is set to explosion!");
+			                 $this->effect === 1;
 					}
 				}
-				if($params[0] == "explosion"){
-					if(isset($this->CONFIG["explosion"])){
-						$this->CONFIG["explosion"] = $params[1]; 
-						return "[Pickaxe] the explosion size have been set to" . $params[1] ."!";
+				if($params[1] === "smelt"){
+				if($this->effect === 1){
+			                 $issuer->sendChat("[Pickaxe] Pickaxe effect is already set to smelt!");	
+					}
+					if($this->effect === 2){
+			                 $issuer->sendChat("[Pickaxe] Pickaxe effect is set to smelt!");
+			                 $this->effect === smelting;
 					}
 				}
+				}
+					
+					
+				if($params[0] === "explosion"){
+					$this->explosion === $params[1];
+					 $issuer->sendChat("[Pickaxe]explosion size" . $params[1]);
+				}
+				
+				}
+			}
+		
+		public function pickaxe($data, $event){
+			
+			if($this->pickaxe === true and $this->effect === 2 and $this->kind === $data["item"]->getID()){
+				(new Explosion($data["target"], $this->explosion))->explode();
 			}
 		}
-		public function pickaxe($data, $event){
-			$config = $this->CONFIG;
-			$this->enabled = $config["Pickaxe"];
-			if($this->CONFIG["Pickaxe"] and $this->CONFIG["effect"] == "explosion" and $this->CONFIG["kind"] === $data["item"]->getID()){
-				(new Explosion($data["block"], $this->explosion))->explode();
-			}
 		public function damage($data, $event){
 			if($data["entity"]->class === ENTITY_PLAYER){
 				$player = $data["entity"]->player;
