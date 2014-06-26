@@ -24,7 +24,7 @@ class WhatEever implements Plugin{
 		$this->api->event("player.block.touch", array($this, "pickaxe"));
 		$this->api->addHandler("entity.health.change", array($this, "damage"));
 		}
-		public function commandHandler($cmd, $params){
+		public function commandHandler($cmd, $params, $issuer){
 			switch(strtolower($cmd)){
 			case "Pickaxe":
 				if($params[0] == "enable"){
